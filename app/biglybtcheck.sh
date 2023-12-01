@@ -29,3 +29,4 @@ if [ -n "${USER}" ]; then
   MYGID=`getent passwd ${USER} | cut -d: -f4`
   chown -R ${USER}:${MYGID} ${HOME} /data || bail "chown -R ${USER}:${MYGID} ${HOME} /data"
 fi
+
