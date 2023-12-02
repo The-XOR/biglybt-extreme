@@ -5,13 +5,14 @@
 
 ## Software
 * [BiglyBT](https://www.biglybt.com/) - A java-based bittorrent application
-* [openvpn](https://openvpn.net/)
 * [Extreme Mod](https://www.sb-innovation.de/showthread.php?35648-BiglyBT-Extreme-Mod-by-SB-Innovation-3-4-0-0-Beta-rev1)
 
-## Get the image from Docker Hub or build it locally
+## Per compilare lo tutto:
 ```
-docker pull fullaxx/biglybt-extreme
-docker build -t="fullaxx/biglybt-extreme" github.com/Fullaxx/biglybt-extreme
+DIRETTAMENTE sul container occore crear l'immagine che a Sua immagine e'.
+Per far cio', ci si connette all'LXC (o VM) della questione e si clonazza
+git clone la repository
+docker build -t="the-xor/biglybt-extreme" github.com/the-xor/biglybt-extreme
 ```
 
 ## Volume Options
@@ -20,8 +21,7 @@ Output: Your downloads will reside in /srv/docker/biglybt/data/out/complete
 ```
 -v /srv/docker/biglybt/data:/data
 ```
-Configuration: Any .ovpn files must be placed in /srv/docker/biglybt/config/ \
-Also, if biglybt.config is found in /config, it will be copied to $HOME/.biglybt/ and used
+Configuration: if biglybt.config is found in /config, it will be copied to $HOME/.biglybt/ and used
 ```
 -v /srv/docker/biglybt/config:/config
 ```
@@ -59,7 +59,8 @@ Default: 1280x800
 Optional: Set Password Authentication \
 Default: No Authentication
 ```
--e VNCPASS='vncpass'
+-e VNCPASS=vncpass
+**** OCCHIO  A NON METTERE APICI O DOPPI APICI ****
 ```
 Optional: Set Read-Write and Read-Only password \
 Default: No Authentication
@@ -95,19 +96,6 @@ Default: 0022
 -e VNCUMASK='0002'
 ```
 
-## OpenVPN Options
-Optional: Wait 9 seconds for openvpn to initiate and connect before moving on \
-Default: 6 seconds
-```
--e OVPNSLEEPTIME='9'
-```
-Use the file *myconnection.ovpn* to connect to an openvpn service \
-Default behavior is that openvpn will not run \
-Any .ovpn files must be placed in your openvpn volume (/srv/docker/biglybt/config/)
-```
--e OVPNCFG='myconnection.ovpn'
-```
-
 ## TimeZone Configuration
 Set the timezone to be used inside the container \
 Default: UTC
@@ -140,7 +128,7 @@ Run the image keeping your biglybt configuration
 docker run -d \
 -v /srv/docker/biglybt/bbtconfig:/root/.biglybt \
 -v /srv/docker/biglybt/data:/data \
--p 127.0.0.1:5901:5901 fullaxx/biglybt
+-p 127.0.0.1:5901:5901 the-xor/biglybt
 ```
 Run the image as a non-root user
 ```
@@ -148,7 +136,7 @@ docker run -d \
 -e VNCUSER='guest' -e VNCUID='1000' \
 -v /srv/docker/biglybt/bbtconfig:/home/guest/.biglybt \
 -v /srv/docker/biglybt/data:/data \
--p 127.0.0.1:5901:5901 fullaxx/biglybt
+-p 127.0.0.1:5901:5901 the-xor/biglybt
 ```
 Run the image as a non-root user with custom group
 ```
@@ -157,20 +145,14 @@ docker run -d \
 -e VNCGROUP='guests' -e VNCGID='1001' \
 -v /srv/docker/biglybt/bbtconfig:/home/guest/.biglybt \
 -v /srv/docker/biglybt/data:/data \
--p 127.0.0.1:5901:5901 fullaxx/biglybt
+-p 127.0.0.1:5901:5901 the-xor/biglybt
 ```
-Run the image with OpenVPN \
-Make sure that your *myconnection.ovpn* file exists in /srv/docker/biglybt/config/
 ```
 docker run -d \
---cap-add=NET_ADMIN --device /dev/net/tun \
---sysctl net.ipv6.conf.all.disable_ipv6=0 \
--e OVPNCFG='myconnection.ovpn' \
--e OVPNSLEEPTIME='9' \
 -e LOGFILE='mylog' \
 -v /srv/docker/biglybt/data:/data \
 -v /srv/docker/biglybt/config:/config \
--p 127.0.0.1:5901:5901 fullaxx/biglybt
+-p 127.0.0.1:5901:5901 the-xor/biglybt
 ```
 
 ## Connect using vncviewer or a web browser
@@ -185,5 +167,4 @@ When posting issues, please provide the following:
 * docker run line used to create the container
 * output from docker logs
 * screenshot showing the issue if not described in logs
-* If OpenVPN related: read [OPENVPN.md](OPENVPN.md) and provide contents of /var/log/openvpn/openvpn.log
 * If base image related: read [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
