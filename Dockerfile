@@ -12,7 +12,7 @@ ENV LANG C
 # Install prerequisites and clean up
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    novnc websockify tree && \
+    tree && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
@@ -34,7 +34,7 @@ VOLUME /data
 
 # ------------------------------------------------------------------------------
 # Expose ports
-EXPOSE 8080
+EXPOSE 5901
 
 # ------------------------------------------------------------------------------
 # Define default command
