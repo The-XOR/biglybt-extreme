@@ -12,7 +12,8 @@ ENV LANG C
 # Install prerequisites and clean up
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      tree && \
+    novnc websockify && \
+    tree && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
@@ -26,6 +27,7 @@ COPY app/*.sh app/*.zip /app/
 COPY conf/autostart conf/menu.xml /usr/share/ubuntu-desktop/openbox/
 COPY scripts/*.sh /app/scripts/
 COPY plugins/* /app/plugins/
+COPY noVNC/index.html /usr/share/novnc/
 
 # ------------------------------------------------------------------------------
 # Identify Volumes
@@ -33,7 +35,7 @@ VOLUME /data
 
 # ------------------------------------------------------------------------------
 # Expose ports
-EXPOSE 5901
+EXPOSE 8080
 
 # ------------------------------------------------------------------------------
 # Define default command

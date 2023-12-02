@@ -6,6 +6,8 @@ bail()
   exit 1
 }
 
+exec websockify --web=/usr/share/novnc/ 8080 localhost:5901
+
 source /app/imagestart.sh
 
 /app/biglybtcheck.sh
