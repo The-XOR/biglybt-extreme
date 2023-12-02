@@ -26,7 +26,6 @@ COPY app/*.sh app/*.zip /app/
 COPY conf/autostart conf/menu.xml /usr/share/ubuntu-desktop/openbox/
 COPY scripts/*.sh /app/scripts/
 COPY plugins/* /app/plugins/
-COPY noVNC/index.html /usr/share/novnc/
 
 # ------------------------------------------------------------------------------
 # Identify Volumes
