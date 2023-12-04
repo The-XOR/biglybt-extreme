@@ -8,7 +8,7 @@ bail()
 
 source /app/imagestart.sh
 
-#exec websockify --web=/usr/share/novnc/ 8080 172.17.0.1:5901
+exec websockify --web=/usr/share/novnc/ 8080 192.168.100.18:5901
 
 /app/biglybtcheck.sh
 
