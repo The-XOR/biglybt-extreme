@@ -12,14 +12,13 @@ ENV LANG C
 # Install prerequisites and clean up
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    novnc websockify tree && \
+    tree && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 # ------------------------------------------------------------------------------
 # Provide default BiglyBT config
 COPY conf/biglybt.config /usr/share/biglybt/biglybt.config.default
-COPY noVNC/index.html /usr/share/novnc/
 
 # ------------------------------------------------------------------------------
 # Install startup scripts
@@ -35,7 +34,6 @@ VOLUME /data
 # ------------------------------------------------------------------------------
 # Expose ports
 EXPOSE 5901
-EXPOSE 8080
 
 # ------------------------------------------------------------------------------
 # Define default command
