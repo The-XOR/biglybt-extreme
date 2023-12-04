@@ -8,7 +8,7 @@ bail()
 
 source /app/imagestart.sh
 
-exec websockify --web=/usr/share/novnc/ 8080 nasso.airdns.org:8228
+exec websockify --web=/usr/share/novnc/ 8080 172.17.0.1:5901
 
 /app/biglybtcheck.sh
 
